@@ -1,77 +1,136 @@
-# Desarrollo de componentes para la integración con repositorio
+# PPF/UF2218/MANUEL
 
-##  Objetivo
-
-El alumnado debe comprender y aplicar el manejo de ficheros **XML** como sistema de almacenamiento estructurado, integrándolo en una aplicación web desarrollada con **PHP**.  
-Deberán **modificar, ampliar y documentar** un CRUD existente basado en este tipo de almacenamiento.
+Aplicación web desarrollada en PHP orientada a la **gestión de coches** con operaciones CRUD, control de acceso por roles, almacenamiento XML y validación estructural mediante XSD.  
+Este sistema simula un concesionario digital completo, robusto y adaptable.
 
 ---
 
-##  Enunciado del ejercicio
+## 📁 Estructura del proyecto
 
-Se te proporciona una aplicación web funcional que permite **insertar y eliminar coches** registrados en un fichero XML.
+```plaintext
+PPF/UF2218/MANUEL/
+├── login.php              → Acceso con usuarios definidos en XML
+├── logout.php             → Cierre seguro de sesión
+├── panel.php              → Panel principal con acciones según rol
+├── insertar_coche.php     → Inserta nuevos coches al XML
+├── modificar_coche.php    → Modifica datos existentes
+├── eliminar_coche.php     → Elimina coche por matrícula
+├── buscar_coche.php       → Búsqueda avanzada (por 7 campos)
+├── validar_xml.php        → Verifica estructura del XML con esquema.xsd
+├── test_eliminar.php      → Prueba directa de eliminación desde XML
+├── README.md              → Documentación técnica del sistema
+└── /files/
+    ├── coches.xml         → Base de datos XML de coches
+    ├── esquema.xsd        → Esquema de validación formal XSD
+    └── usuarios.xml       → Usuarios con roles para autenticación
+🔐 Gestión de Usuarios y Roles
+Se definieron los siguientes roles personalizados dentro del archivo usuarios.xml:
 
-Deberás realizar las siguientes tareas:
+Rol	Permisos
+administrador	Insertar, modificar, eliminar y buscar coches
+empleado	Insertar y modificar coches solamente
+consultor	Buscar y consultar coches sin modificar ni eliminar
+Los usuarios se autentican desde el XML con login.php.
 
----
+El rol se guarda en $_SESSION['rol'] y controla las acciones disponibles.
 
-### 1.  Analizar el funcionamiento de cada fichero proporcionado
+logout.php destruye la sesión y devuelve al login.
 
-- Explica en un documento `.md` el propósito de cada archivo:
-  - Archivos **PHP**
-  - Archivo **XML**
-  - Esquema **XSD**
-  - Hoja de estilo **XSL**
+⚙️ Operaciones Disponibles
+➕ Insertar coche
+Valida todos los campos necesarios
 
----
+Verifica matrícula única para evitar duplicados
 
-### 2.  Ampliar la funcionalidad del CRUD
+Disponible para administrador y empleado
 
-- Añadir una opción para **modificar** un coche ya existente.
-- Mostrar un listado de coches con una interfaz visual **más atractiva** utilizando `coches.xsl`.
+✏️ Modificar coche
+Permite editar los datos existentes
 
----
+Aplica validaciones básicas por campo
 
-### 3.  Validación de esquema XML
+Disponible para administrador y empleado
 
-- Validar que los datos del XML cumplen con el esquema `coches.xsd` tras cada operación (inserción, modificación, eliminación).
+🗑️ Eliminar coche
+Elimina por coincidencia exacta de matrícula (trim() aplicado)
 
----
+Exclusivo para administrador
 
-### 4.  Control de errores
+🔍 Buscar coche
+Mejora implementada: búsqueda por 7 campos
 
-Implementa mensajes de error o alertas para los siguientes casos:
+Matrícula, marca, modelo, color, puertas, precio, tipo de venta
 
-- Inserción de **matrícula duplicada**
-- Eliminación o modificación de un coche que **no existe**
+Interfaz con desplegable + campo de texto
 
----
+Disponible para todos los roles
 
-### 5.  Crear el script `buscar_coche.php`
+🛡️ Validación XML con XSD
+Implementamos esquema.xsd para validar la estructura del XML. La validación se realiza con PHP (DOMDocument::schemaValidate()) desde el script validar_xml.php:
 
-- Permite buscar coches por **marca** o **modelo** desde un formulario HTML.
+Matrícula como atributo obligatorio
 
----
+Marca, modelo, color como cadenas (xs:string)
 
-### 6.  Documentación técnica
+Puertas como número entero (xs:integer)
 
-Crea un archivo `README.md` (este archivo) que incluya:
+Precio como decimal (xs:decimal) con atributo venta obligatorio
 
-- La **estructura del sistema** (carpetas y archivos)
-- Cómo se realiza cada operación (insertar, eliminar, modificar, buscar)
-- Validaciones aplicadas
-- Capturas de pantalla de las **pruebas funcionales**
+✅ Esto garantiza que el sistema nunca cargue ni modifique un XML mal estructurado.
 
----
+🧪 Scripts Técnicos de Diagnóstico
+test_eliminar.php
+Elimina una matrícula directamente usando GET
 
-### 7.  Modo de entrega
+Protegido por sesión activa y rol de administrador
 
-- Comparte con el docente un **repositorio Git** con el nombre:  
-  `E2_[Nombre_del_alumno]`
+Útil para verificar si el XML responde bien fuera de la interfaz
 
----
+validar_xml.php
+Comprueba si el XML cumple el esquema definido
 
-## 💪 ¡Ánimo!
+Muestra errores internos si la estructura falla
 
-Este ejercicio te permitirá poner en práctica el desarrollo de sistemas web integrados con XML, un formato ampliamente utilizado en entornos profesionales.
+Puede incluirse en otros scripts como capa de seguridad
+
+✅ Mejoras Aplicadas al Proyecto
+🔧 Transición a XML con validación XSD, para evitar estructura débil
+
+🔐 Implementación de roles dinámicos, incluyendo rol intermedio empleado
+
+🔍 Búsqueda avanzada por múltiples campos mediante formulario con desplegable
+
+🧼 Comparaciones seguras usando trim() para evitar fallos invisibles
+
+📦 Separación clara entre lógica PHP y presentación visual con Bootstrap
+
+🧪 Herramientas técnicas para pruebas específicas sin romper el flujo principal
+
+🎯 Control granular de acciones por rol, aumentando la profesionalidad del sistema
+
+📸 Capturas Recomendadas
+Incluir imágenes de:
+
+Pantalla de login con roles definidos
+
+Vista del panel según cada rol
+
+Formulario de inserción y modificación
+
+Resultados de búsqueda
+
+Mensajes de éxito y validación de errores
+
+🚀 Entrega Oficial
+Repositorio GitHub: Nombre: PPF/UF2218/MANUEL Contenido del repositorio:
+
+Código fuente (PHP + XML + XSD)
+
+Documentación técnica
+
+Capturas funcionales
+
+👤 Autor
+Manuel Proyecto desarrollado en el módulo UF2218, con enfoque avanzado en autenticación, validación estructural y manejo de datos en PHP.
+
 
