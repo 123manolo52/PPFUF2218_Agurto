@@ -1,3 +1,27 @@
+# PPF/UF2218/MANUEL
+
+Aplicación web desarrollada en PHP orientada a la gestión completa de coches con almacenamiento en XML, validación estructural mediante XSD, operaciones CRUD, autenticación con control de roles, interfaz visual con Bootstrap y herramientas de diagnóstico.
+
+---
+
+## 📁 Estructura del Proyecto
+
+```plaintext
+PPF/UF2218/MANUEL/
+├── login.php              → Acceso con usuarios desde XML
+├── logout.php             → Cierre seguro de sesión
+├── panel.php              → Panel principal según rol
+├── insertar_coche.php     → Inserta nuevos coches en el XML
+├── modificar_coche.php    → Modifica coches existentes
+├── eliminar_coche.php     → Elimina coche por matrícula
+├── buscar_coche.php       → Búsqueda avanzada por 7 campos
+├── validar_xml.php        → Verifica que el XML cumple el esquema XSD
+├── test_eliminar.php      → Diagnóstico de eliminación directa (con sesión)
+├── README.md              → Documentación técnica
+└── files/
+    ├── coches.xml         → Base de datos XML de coches
+    ├── esquema.xsd        → Esquema de validación estructural
+    └── usuarios.xml       → Usuarios y roles definidos
 ## 🔐 Gestión de Usuarios y Roles
 
 Se definieron los siguientes roles personalizados dentro del archivo `usuarios.xml`:
