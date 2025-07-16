@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="coches.xsl"?>
+<coches xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="coches.xsd">
+  <coche matricula="5678AFG">
+    <marca>Audi</marca>
+    <modelo>10</modelo>
+    <puertas>5</puertas>
+    <color>Guinda</color>
+    <precio venta="nuevo">10010</precio>
+  </coche>
+  <coche matricula="1234MMM">
+    <marca>Seat</marca>
+    <modelo>124</modelo>
+    <puertas>5</puertas>
+    <color>Blanco</color>
+    <precio venta="ocasión">3000</precio>
+  </coche>
+  <coche matricula="5656FFF">
+    <marca>Seat</marca>
+    <modelo>133</modelo>
+    <puertas>3</puertas>
+    <color>Rojo</color>
+    <precio venta="ocasión">2000</precio>
+  </coche>
+  <coche matricula="0011FFF">
+    <marca>Ford</marca>
+    <modelo>Granada</modelo>
+    <puertas>3</puertas>
+    <color>Blanco</color>
+    <precio venta="nuevo">1233</precio>
+  </coche>
+  <coche matricula="4545CCC">
+    <marca>Land Rover</marca>
+    <modelo>Yeep</modelo>
+    <puertas>5</puertas>
+    <color>Verde</color>
+    <precio venta="ocasión">9999</precio>
+  </coche>
+<coche matricula="5656FFU"><marca>Toyota</marca><modelo>LOCK</modelo><puertas>4</puertas><color>NEGR0</color><precio venta="ocasión">3000</precio></coche><coche matricula="5678XFH"><marca>BWB</marca><modelo>3209</modelo><puertas>2</puertas><color>verde</color><precio venta="segunda mano">1500</precio></coche><coche matricula="3311FFF"><marca>DATSUN</marca><modelo>DASH</modelo><puertas>2</puertas><color>AMARILLO</color><precio venta="ocasión">1000</precio></coche></coches>
